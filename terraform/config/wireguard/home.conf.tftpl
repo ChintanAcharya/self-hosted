@@ -1,0 +1,19 @@
+[Interface]
+Address = 10.10.10.1/24
+DNS = 1.1.1.1,1.0.0.1
+PrivateKey = ${wireguard_server_private_key}
+ListenPort = 51820
+PostUp = iptables -I FORWARD 1 -i home -j ACCEPT  
+PostDown = iptables -D FORWARD -i home -j ACCEPT
+
+[Peer]
+PublicKey = ${nuc_public_key}
+AllowedIPs = 10.10.10.2/32
+
+[Peer]
+PublicKey = ${mac_public_key}
+AllowedIPs = 10.10.10.3/32
+
+[Peer]
+PublicKey = ${desktop_public_key}
+AllowedIPs = 10.10.10.4/32

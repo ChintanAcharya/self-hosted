@@ -1,0 +1,4 @@
+terraform/secrets.hcl
+terraform/instances/.terraform
+*.tfstate
+*.tfstate.backup

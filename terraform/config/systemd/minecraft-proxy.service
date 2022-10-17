@@ -1,0 +1,12 @@
+[Unit]
+Description=Minecraft Proxy
+Wants=network.target
+After=wg-quick@home
+
+[Service]
+User=chintan
+WorkingDirectory=/home/chintan/
+ExecStart=socat -T60 udp4-listen:19132,fork,reuseaddr udp4:10.10.10.2:19132
+
+[Install]
+WantedBy=multi-user.target
