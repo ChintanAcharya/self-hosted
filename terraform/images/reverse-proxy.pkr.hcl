@@ -56,11 +56,12 @@ build {
     destination = "/etc/sysctl.d/99-custom.conf"
   }
 
-  # Install and configure wireguard
+  # Install packages
   provisioner "shell" {
-    script = "./scripts/install-wireguard.sh"
+    script = "./scripts/install-packages.sh"
   }
 
+  # Add wireguard configuration
   provisioner "file" {
     content = templatefile("../config/wireguard/home.conf.tftpl", {
       wireguard_server_private_key = var.wireguard_server_private_key,
