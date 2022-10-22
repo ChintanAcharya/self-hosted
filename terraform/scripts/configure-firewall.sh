@@ -12,4 +12,4 @@ sudo ufw allow 51820/udp
 # Minecraft Proxy
 sudo ufw allow 19132/udp
 
-sudo systemctl enable ufw
+sudo ufw enable
