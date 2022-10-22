@@ -45,6 +45,11 @@ source "digitalocean" "reverse-proxy" {
 build {
   sources = ["source.digitalocean.reverse-proxy"]
 
+  # Configure firewall
+  provisioner "shell" {
+    script = "./scripts/configure-firewall.sh"
+  }
+
   # Configure sysctl 
   provisioner "file" {
     source      = "./config/sysctl/99-custom.conf"
