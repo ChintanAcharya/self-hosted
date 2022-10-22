@@ -1,0 +1,12 @@
+[Unit]
+Description=Route Outbound Traffic through Reserved IP
+Wants=network.target
+Before=wg-quick@home
+
+[Service]
+User=chintan
+WorkingDirectory=/home/chintan/
+ExecStart=sudo sh -c "ip route del 0/0; ip route add default via 10.47.0.1 dev eth0"
+
+[Install]
+WantedBy=multi-user.target

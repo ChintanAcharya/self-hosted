@@ -77,6 +77,18 @@ build {
     ]
   }
 
+  # Set outbound traffic config
+  provisioner "file" {
+    source      = "./config/systemd/outbound-traffic-config.service"
+    destination = "/etc/systemd/system/outbound-traffic-config.service"
+  }
+
+  provisioner "shell" {
+    inline = [
+      "sudo systemctl enable outbound-traffic-config.service"
+    ]
+  }
+
   # Set up reverse proxies for publicly exposed services
   provisioner "file" {
     source      = "./config/systemd/minecraft-proxy.service"
