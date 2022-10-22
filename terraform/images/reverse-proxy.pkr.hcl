@@ -45,6 +45,11 @@ source "digitalocean" "reverse-proxy" {
 build {
   sources = ["source.digitalocean.reverse-proxy"]
 
+  # Install packages
+  provisioner "shell" {
+    script = "./scripts/install-packages.sh"
+  }
+
   # Configure firewall
   provisioner "shell" {
     script = "./scripts/configure-firewall.sh"
@@ -54,11 +59,6 @@ build {
   provisioner "file" {
     source      = "./config/sysctl/99-custom.conf"
     destination = "/etc/sysctl.d/99-custom.conf"
-  }
-
-  # Install packages
-  provisioner "shell" {
-    script = "./scripts/install-packages.sh"
   }
 
   # Add wireguard configuration
