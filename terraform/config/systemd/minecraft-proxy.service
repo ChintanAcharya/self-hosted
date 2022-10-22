@@ -1,7 +1,7 @@
 [Unit]
 Description=Minecraft Proxy
 Wants=network.target
-After=wg-quick@home
+After=wg-quick@home.service
 
 [Service]
 User=chintan

@@ -1,7 +1,7 @@
 [Unit]
 Description=Route Outbound Traffic through Reserved IP
 Wants=network.target
-Before=wg-quick@home
+Before=wg-quick@home.service
 
 [Service]
 User=chintan
