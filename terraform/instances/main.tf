@@ -29,14 +29,14 @@ data "digitalocean_droplet_snapshot" "reverse_proxy_snapshot" {
   most_recent = true
 }
 
-resource "digitalocean_droplet" "reverse_proxy_test" {
+resource "digitalocean_droplet" "reverse_proxy" {
   image  = data.digitalocean_droplet_snapshot.reverse_proxy_snapshot.id
   region = var.do_region
   size   = "s-1vcpu-1gb"
-  name   = "reverse-proxy-test"
+  name   = "reverse-proxy"
 }
 
 resource "digitalocean_reserved_ip_assignment" "reverse_proxy_ip_assignment" {
   ip_address = var.reverse_proxy_public_ip
-  droplet_id = digitalocean_droplet.reverse_proxy_test.id
+  droplet_id = digitalocean_droplet.reverse_proxy.id
 }
