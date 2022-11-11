@@ -28,6 +28,12 @@ spec:
         env:
         - name: EULA
           value: "true"
+        - name: SERVER_NAME
+          value: "Chintan's Minecraft Server"
+        - name: DIFFICULTY
+          value: "hard"
+        - name: OPS
+          value: "2533274977653363"
         resources:
           limits:
             cpu: "4"
