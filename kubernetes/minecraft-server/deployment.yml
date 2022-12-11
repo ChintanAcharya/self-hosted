@@ -41,6 +41,12 @@ spec:
         volumeMounts:
         - mountPath: "/data"
           name: data
+        livenessProbe:
+          exec:
+            command:
+            - "/bin/sh"
+            - "-c"
+            - "/usr/local/bin/mc-monitor status-bedrock --host 127.0.0.1 --port 19132"
 ---
 apiVersion: v1
 kind: Service
