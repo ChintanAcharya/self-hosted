@@ -26,6 +26,8 @@ spec:
           containerPort: 19132
           protocol: UDP
         env:
+        - name: VERSION
+          value: 1.19.51.01
         - name: EULA
           value: "true"
         - name: SERVER_NAME
