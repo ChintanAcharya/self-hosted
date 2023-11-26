@@ -1,0 +1,16 @@
+set pod [lindex $argv 0]
+
+spawn kubectl attach "$pod" -i
+
+while true {
+  send "save hold\r"
+  expect "Saving...*" { break }
+  expect "The command is already running*" { break }
+}
+
+sleep 1
+
+while true {  
+  send "save query\r"
+  expect "Data saved.*" { break }
+}

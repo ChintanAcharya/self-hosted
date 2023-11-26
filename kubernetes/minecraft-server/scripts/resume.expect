@@ -1,0 +1,8 @@
+set pod [lindex $argv 0]
+
+spawn kubectl attach "$pod" -i
+
+while true {
+  send "save resume\r"
+  expect "Changes to the world are resumed.*" { break }
+}
