@@ -15,41 +15,45 @@ spec:
         app: minecraft
     spec:
       volumes:
-      - name: data
-        persistentVolumeClaim:
-          claimName: minecraft-data
+        - name: data
+          persistentVolumeClaim:
+            claimName: minecraft-data
       containers:
-      - name: minecraft-server
-        image: itzg/minecraft-bedrock-server
-        ports:
-        - hostPort: 19132
-          containerPort: 19132
-          protocol: UDP
-        stdin: true
-        env:
-        - name: VERSION
-          value: 1.20.41.02
-        - name: EULA
-          value: "true"
-        - name: SERVER_NAME
-          value: "Chintan's Minecraft Server"
-        - name: DIFFICULTY
-          value: "hard"
-        - name: OPS
-          value: "2533274977653363"
-        resources:
-          limits:
-            cpu: "2"
-            memory: 2Gi
-        volumeMounts:
-        - mountPath: "/data"
-          name: data
-        livenessProbe:
-          exec:
-            command:
-            - "/bin/sh"
-            - "-c"
-            - "/usr/local/bin/mc-monitor status-bedrock --host 127.0.0.1 --port 19132"
+        - name: minecraft-server
+          image: itzg/minecraft-bedrock-server
+          ports:
+            - hostPort: 19132
+              containerPort: 19132
+              protocol: UDP
+          stdin: true
+          env:
+            - name: EULA
+              value: "true"
+            - name: SERVER_NAME
+              value: "Phoenix 2.0"
+            - name: DIFFICULTY
+              value: "hard"
+            - name: OPS
+              value: "2533274977653363,2535442268585717,2535415316165238"
+            - name: ALLOW_LIST_USERS
+              value: "cryoBLUR:2533274977653363,GapLaiSau:2535442268585717,meownica7975:2535415316165238,CaptainTorch340:2535458470889227,TrivediV:2535412155394839"
+            - name: LEVEL_NAME
+              value: "world-26-jul-24"
+            - name: LEVEL_SEED
+              value: "8360258021864768351"
+          resources:
+            limits:
+              cpu: 4
+              memory: 4Gi
+          volumeMounts:
+            - mountPath: "/data"
+              name: data
+          livenessProbe:
+            exec:
+              command:
+                - "/bin/sh"
+                - "-c"
+                - "/usr/local/bin/mc-monitor status-bedrock --host 127.0.0.1 --port 19132"
 ---
 apiVersion: v1
 kind: Service
@@ -60,10 +64,10 @@ spec:
     app: minecraft
   type: NodePort
   ports:
-  - targetPort: 19132
-    port: 19132
-    protocol: UDP
-    name: udp
+    - targetPort: 19132
+      port: 19132
+      protocol: UDP
+      name: udp
 ---
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRouteUDP
@@ -71,11 +75,11 @@ metadata:
   name: minecraft
 spec:
   entryPoints:
-  - minecraft
+    - minecraft
   routes:
-  - services:
-    - name: minecraft
-      port: 19132
+    - services:
+        - name: minecraft
+          port: 19132
 ---
 apiVersion: v1
 kind: PersistentVolume
@@ -86,7 +90,7 @@ spec:
     storage: 5Gi
   volumeMode: Filesystem
   accessModes:
-  - ReadWriteOnce
+    - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
   storageClassName: local-storage
   local:
@@ -94,11 +98,11 @@ spec:
   nodeAffinity:
     required:
       nodeSelectorTerms:
-      - matchExpressions:
-        - key: kubernetes.io/hostname
-          operator: In
-          values:
-          - intel
+        - matchExpressions:
+            - key: kubernetes.io/hostname
+              operator: In
+              values:
+                - intel
 ---
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
