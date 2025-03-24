@@ -12,6 +12,6 @@ dir="$(dirname "$(readlink -f "$0")")"
 # TODO: timeouts for expect and kubectl commands
 expect "$dir/hold.expect" "$pod"
 
-kubectl exec "$pod" -- tar cf - "$source" > "$3"
+kubectl exec "$pod" -- tar cf - "$source" > "$dest"
 
 expect "$dir/resume.expect" "$pod"
