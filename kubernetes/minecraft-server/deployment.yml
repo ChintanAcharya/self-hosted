@@ -30,6 +30,7 @@ spec:
             - name: EULA
               value: "true"
             - name: SERVER_NAME
+<<<<<<< HEAD
               value: "Chintan"
             - name: DIFFICULTY
               value: "hard"
@@ -41,6 +42,19 @@ spec:
               value: "world-2025-03-25-2"
             - name: LEVEL_SEED
               value: "3138714768161184709"
+=======
+              value: "Chintan's Minecraft Server"
+            - name: DIFFICULTY
+              value: "hard"
+            - name: OPS
+              value: "2533274977653363,2535442268585717,2535415316165238,2535452981993196"
+            - name: ALLOW_LIST_USERS
+              value: "cryoBLUR:2533274977653363,GapLaiSau:2535442268585717,meownica7975:2535415316165238,CaptainTorch340:2535458470889227,TrivediV:2535412155394839,GabeNewell69420:2535452981993196"
+            - name: LEVEL_NAME
+              value: "world-2024-04-06"
+            - name: LEVEL_SEED
+              value: "1665533335506319603"
+>>>>>>> 5276505 (Update allow list and node affinity)
           resources:
             limits:
               cpu: 4
