@@ -7,5 +7,3 @@ spec:
   valuesContent: |-
     globalArguments:
     - "--entrypoints.minecraft.address=:19132/udp"
-    - "--api.dashboard=true" 
-    - "--api.insecure=true"
